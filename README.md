@@ -1,23 +1,34 @@
-# EasyXMRig
+EasyXMRig README (MoneroOcean 전용)
+소개
+EasyXMRig는 XMRig 기반으로 MoneroOcean 풀에 바로 연결되도록 미리 설정된 easy 버전입니다.
+설정 건드릴 필요 없이 바로 실행 가능해요.
+사용 방법
 
-## Overview
-EasyXMRig는 XMRig 기반의 Monero(XMR) 코인 마이너를 쉽게 사용할 수 있도록 만든 Windows 프로그램입니다.
+easyxmrig (1).exe 파일을 실행
+자동으로 MoneroOcean 풀에 연결되어 채굴 시작
+중지하고 싶으면 작업 관리자에서 easyxmrig 또는 xmrig 프로세스 종료
 
-**⚠️ 주의사항**: 
-- CPU/GPU를 많이 사용하고 전기 소모가 큽니다.
-- 일부 안티바이러스에서 마이닝 툴로 오탐지될 수 있습니다.
-- 본인 소유의 PC에서만 사용하세요.
+MoneroOcean 설정 설명
+이 프로그램은 MoneroOcean에 완전히 최적화되어 있습니다.
 
-## 사용 방법
-1. `easyxmrig.exe`를 실행하세요.
-2. GUI에서 마이닝 풀 주소, 지갑 주소 등을 설정합니다.
-3. 마이닝을 시작하세요.
+Pool 주소: pool.moneroocean.stream:10128
+알고리즘: RandomX (Monero 전용)
+지갑 주소: 프로그램에 설정된 Monero 지갑 주소 사용
+Worker 이름: PC 이름 또는 자동 생성
+Password: x
+기타: keepalive, 자동 스레드 최적화 적용
 
-## 요구사항
-- Windows 운영체제
-- 안정적인 인터넷 연결
-- 충분한 CPU/GPU 성능
+MoneroOcean이란?
+모네로(XMR) 전문 마이닝 풀입니다.
+PPLNS 방식으로 안정적이고, CPU/GPU 모두 잘 지원해요.
+사용 팁
 
-## Disclaimer
-이 파일은 사용자가 제공한 `easyxmrig.exe`를 기반으로 자동 생성된 README입니다.  
-사용 시 발생하는 모든 책임은 사용자에게 있습니다.
+moneroocean.stream에서 Monero 지갑 주소 확인
+exe 실행 후 대시보드에서 실시간 해시레이트 체크
+CPU 위주로 채굴 추천 (RandomX에 강함)
+
+주의사항
+
+안티바이러스에서 차단될 수 있음 → 예외 등록하세요
+과도한 사용 시 발열 주의
+개인용으로만 사용
