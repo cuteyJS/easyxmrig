@@ -4,7 +4,7 @@ EasyXMRig는 XMRig 기반으로 MoneroOcean 풀에 바로 연결되도록 미리
 설정 건드릴 필요 없이 바로 실행 가능해요.
 사용 방법
 
-easyxmrig (1).exe 파일을 실행
+easyxmrig.exe 파일을 실행
 자동으로 MoneroOcean 풀에 연결되어 채굴 시작
 중지하고 싶으면 작업 관리자에서 easyxmrig 또는 xmrig 프로세스 종료
 
