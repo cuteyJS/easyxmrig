@@ -1,34 +1,172 @@
-EasyXMRig README (MoneroOcean 전용)
-소개
-EasyXMRig는 XMRig 기반으로 MoneroOcean 풀에 바로 연결되도록 미리 설정된 easy 버전입니다.
-설정 건드릴 필요 없이 바로 실행 가능해요.
-사용 방법
+# EasyXMRig - MoneroOcean Fixed Pool Edition
 
-easyxmrig.exe 파일을 실행
-자동으로 MoneroOcean 풀에 연결되어 채굴 시작
-중지하고 싶으면 작업 관리자에서 easyxmrig 또는 xmrig 프로세스 종료
+EasyXMRig는 XMRig 채굴기를 GUI로 손쉽게 관리할 수 있는 도구입니다.
+**이 버전은 MoneroOcean 풀(`gulf.moneroocean.stream:20128`)로 완전 고정되어 있습니다.**
 
-MoneroOcean 설정 설명
-이 프로그램은 MoneroOcean에 완전히 최적화되어 있습니다.
+## 빌드 (exe 만들기)
 
-Pool 주소: pool.moneroocean.stream:10128
-알고리즘: RandomX (Monero 전용)
-지갑 주소: 프로그램에 설정된 Monero 지갑 주소 사용
-Worker 이름: PC 이름 또는 자동 생성
-Password: x
-기타: keepalive, 자동 스레드 최적화 적용
+### 1단계: 필수 설치
+```bash
+pip install pyinstaller
+```
 
-MoneroOcean이란?
-모네로(XMR) 전문 마이닝 풀입니다.
-PPLNS 방식으로 안정적이고, CPU/GPU 모두 잘 지원해요.
-사용 팁
+### 2단계: exe 빌드
+```bash
+python build_exe.py
+```
 
-moneroocean.stream에서 Monero 지갑 주소 확인
-exe 실행 후 대시보드에서 실시간 해시레이트 체크
-CPU 위주로 채굴 추천 (RandomX에 강함)
+### 3단계: 결과물
+빌드 완료 후 다음 파일이 생성됩니다:
+- `dist/easyxmrig_en.exe` (영어판)
+- `dist/easyxmrig_kr.exe` (한국어판)
 
-주의사항
+## 사용 방법
 
-안티바이러스에서 차단될 수 있음 → 예외 등록하세요
-과도한 사용 시 발열 주의
-개인용으로만 사용
+### 1단계: XMRig 다운로드
+- 공식 XMRig GitHub에서 `xmrig.exe` 다운로드:
+  https://github.com/xmrig/xmrig/releases
+- 임의의 폴더에 저장 (예: `C:\Mining\xmrig.exe`)
+
+### 2단계: EasyXMRig 실행
+- `easyxmrig_en.exe` (또는 `easyxmrig_kr.exe`) 실행
+
+### 3단계: 설정
+1. **XMRig Executable**: `Browse...`로 위에서 다운로드한 xmrig.exe 선택
+2. **Wallet address**: 본인의 모네로 지갑 주소 입력
+   - 주소는 자동 검증됩니다 (길이, 형식 등)
+   - 오타 시 채굴이 시작되지 않습니다
+3. **Password / worker id** (선택): 워커 구분용 (기본값: `x`)
+4. **CPU threads** (선택): 사용할 CPU 스레드 수
+   - 비워두면 자동으로 모든 코어 사용
+   - 예: `4` 입력하면 4개 스레드만 사용
+5. **Donate level (%)**: 개발자 기부 비율 (기본값: `1%`)
+   - 참고: 공식 XMRig는 최소 1% 기부를 강제합니다
+
+### 4단계: 채굴 시작
+- `Start Mining` 클릭
+- 설정 확인 대화상자가 뜸
+- 수수료 비율과 지갑 주소 재확인 후 `Yes` 클릭
+- 콘솔 로그를 통해 채굴 상태 확인
+
+### 5단계: 채굴 중지
+- `Stop Mining` 클릭
+- 혹은 창 닫기 (자동으로 프로세스 정리됨)
+
+## 주요 기능
+
+### 고정된 풀
+- 풀 주소는 **MoneroOcean**으로 완전 고정되어 있습니다
+- 사용자가 다른 풀로 변경할 수 없도록 읽기전용 설정
+
+### 자동 스레드 분배 (기부 기능)
+- 입력한 스레드 수의 일부를 자동으로 개발자에게 배분
+- 기본값: 사용자 95%, 개발자 5%
+- 기부 비율은 `build_exe.py` 내의 `FEE_PERCENT`로 조정 가능
+
+### 설정 파일 저장/로드
+- `Save config.json`: 현재 설정을 파일로 저장
+- `Load config.json`: 이전 설정 복원
+- 풀 주소는 저장/복원 시에도 변경되지 않음
+
+### 지갑 주소 검증
+- 주소 형식 자동 검사 (길이, 시작 문자, 영숫자 등)
+- 올바르지 않은 주소로는 채굴 불가능
+- 실수로 잘못된 주소로 채굴하는 걸 방지
+
+### 다국어 지원
+- **easyxmrig_en.exe**: 전부 영어
+- **easyxmrig_kr.exe**: 전부 한국어
+
+## 버그 수정 이력
+
+### v2 (현재)
+- ✅ 스레드 수를 XMRig 명령행 인자(`-t`)로 전달 (config.json 형식 오류 해결)
+- ✅ Monero 지갑 주소 형식 검증 추가
+- ✅ 채굴 시 donate-level 강제 최소치(1%) 안내
+- ✅ 스레드 초과 할당 버그 수정
+- ✅ EN/KR 완전 분리
+
+### v1
+- 초기 버전
+
+## 알려진 제한사항
+
+1. **XMRig의 강제 기부**
+   - 공식 XMRig 바이너리는 기부 비율을 최소 1%로 강제합니다
+   - 0% 기부는 소스에서 직접 재컴파일해야 가능합니다
+
+2. **스레드 수 변경**
+   - CPU 스레드 수를 바꾼 후 채굴 중단 없이 적용하려면 XMRig의 `watch` 기능 사용 필요
+   - 현재 앱은 설정 파일 수정 시 채굴을 중단했다가 재시작합니다
+
+3. **풀 주소 고정**
+   - 다른 풀을 사용하려면 소스코드를 직접 수정 후 재빌드해야 합니다
+
+## 안전 및 개인정보
+
+- ✅ XMRig를 따로 설치해야 합니다 (이 도구에는 포함 안 됨)
+- ✅ Windows Defender/UAC 회피 없음
+- ✅ 레지스트리 수정 없음
+- ✅ 예약 작업 추가 없음
+- ✅ 모든 설정이 화면에 표시되고 확인 후 실행됨
+
+## 트러블슈팅
+
+### exe가 실행 안 돼요
+- Windows 10/11인지 확인
+- Python 3.9 이상이 필요합니다 (빌드 시에만)
+- 바이러스 백신이 exe를 격리하지 않았는지 확인
+- Windows Defender 제외 목록에 추가 시도
+
+### 지갑 주소가 자꾸 거부됩니다
+- 주소를 복사할 때 앞뒤 공백이 없는지 확인
+- 예: `4ABC...XYZ` (띄어쓰기 없음)
+- 주소가 95-105자 길이인지 확인
+
+### 채굴이 시작 안 됩니다
+- xmrig.exe 경로가 정확한지 확인
+- xmrig.exe가 실행 가능한지 직접 더블클릭해 확인
+- 방화벽이 XMRig를 차단하지 않았는지 확인
+
+### 해시레이트가 너무 낮습니다
+- CPU가 가득 차 있는지 확인 (현재 로그 확인)
+- 다른 프로그램이 CPU를 많이 사용하지 않는지 확인
+- 냉각(팬 속도)이 충분한지 확인 (과열 방지)
+
+## 소스코드 수정
+
+### 풀 주소 변경
+`easyxmrig_en.py` / `easyxmrig_kr.py` 상단의 다음 줄을 수정:
+```python
+POOL_URL = "gulf.moneroocean.stream:20128"  # ← 여기 수정
+```
+
+### 기부 비율 변경
+```python
+FEE_PERCENT = 5  # ← 0-100 범위로 수정
+```
+
+### 기부 지갑 주소 변경
+```python
+FEE_WALLET = "47Jifd3..."  # ← 본인 주소로 수정
+```
+
+수정 후:
+```bash
+python build_exe.py
+```
+
+## 라이센스
+
+이 도구는 XMRig의 설정 헬퍼입니다.
+- XMRig 자체는 GPL-3.0 라이센스입니다: https://github.com/xmrig/xmrig
+- 이 헬퍼는 참고용입니다
+
+## 감사의말
+
+- **XMRig 개발진**: 훌륭한 채굴 소프트웨어 개발
+- **MoneroOcean**: 안정적인 채굴 풀 운영
+
+## 문의 / 피드백
+
+버그나 개선사항이 있으시면 리포트해 주세요.
