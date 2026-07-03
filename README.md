@@ -1,27 +1,3 @@
-# EasyXMRig - MoneroOcean Fixed Pool Edition
-
-EasyXMRig는 XMRig 채굴기를 GUI로 손쉽게 관리할 수 있는 도구입니다.
-**이 버전은 MoneroOcean 풀(`gulf.moneroocean.stream:20128`)로 완전 고정되어 있습니다.**
-
-## 빌드 (exe 만들기)
-
-### 1단계: 필수 설치
-```bash
-pip install pyinstaller
-```
-
-### 2단계: exe 빌드
-```bash
-python build_exe.py
-```
-
-### 3단계: 결과물
-빌드 완료 후 다음 파일이 생성됩니다:
-- `dist/easyxmrig_en.exe` (영어판)
-- `dist/easyxmrig_kr.exe` (한국어판)
-
-## 사용 방법
-
 ### 1단계: XMRig 다운로드
 - 공식 XMRig GitHub에서 `xmrig.exe` 다운로드:
   https://github.com/xmrig/xmrig/releases
@@ -114,7 +90,6 @@ python build_exe.py
 
 ### exe가 실행 안 돼요
 - Windows 10/11인지 확인
-- Python 3.9 이상이 필요합니다 (빌드 시에만)
 - 바이러스 백신이 exe를 격리하지 않았는지 확인
 - Windows Defender 제외 목록에 추가 시도
 
